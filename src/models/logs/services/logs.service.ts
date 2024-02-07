@@ -56,18 +56,10 @@ export class logsService {
     throw new BadRequestException('Error in update');
   }
 
-  async getLogByMachineName(machineName: string): Promise<Log[]> {
-    const foundLogs = await this.logRepository.getLogByMachineName(machineName);
+  async getLogsByMachineName(machineName: string): Promise<Log[]> {
+    const foundLogs = await this.logRepository.getLogsByMachineName(machineName);
 
     if (!foundLogs.length) throw new BadRequestException('No results for this machine');
-
-    return foundLogs;
-  }
-
-  async getLogByName(logName: string): Promise<Log[]> {
-    const foundLogs = await this.logRepository.getlogByName(logName);
-
-    if (!foundLogs.length) throw new BadRequestException('No results for this log name');
 
     return foundLogs;
   }

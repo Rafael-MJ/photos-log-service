@@ -20,13 +20,8 @@ export class LogsController {
   }
 
   @Get('machine/:machineName')
-  async getLogByMachineName(@Param('machineName') machineName: string): Promise<Log[]> {
-    return await this.logsService.getLogByMachineName(machineName);
-  }
-
-  @Get('name/:logName')
-  async getLogByName(@Param('logName') logName: string): Promise<Log[]> {
-    return await this.logsService.getLogByName(logName);
+  async getLogsByMachineName(@Param('machineName') machineName: string): Promise<Log[]> {
+    return await this.logsService.getLogsByMachineName(machineName);
   }
 
   @Post()

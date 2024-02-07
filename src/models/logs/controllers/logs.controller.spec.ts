@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { CommonConfig } from 'src/common/config';
 import { LogConfig } from '../log.config';
 import { LogsController } from './logs.controller';
 

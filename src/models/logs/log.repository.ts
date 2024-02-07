@@ -35,19 +35,10 @@ export class LogRepository {
     return updatedLog.modifiedCount;
   }
 
-  async getLogByMachineName(machineName: string): Promise<Log[]> {
+  async getLogsByMachineName(machineName: string): Promise<Log[]> {
     return await this.logModel.find(
       {
         'machine.name': { $regex: machineName, $options: 'i' },
-      },
-      { __v: false },
-    );
-  }
-
-  async getlogByName(logName: string): Promise<Log[]> {
-    return await this.logModel.find(
-      {
-        name: { $regex: logName, $options: 'i' },
       },
       { __v: false },
     );
