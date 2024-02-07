@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { CommonConfig } from 'src/common/config';
+import { LogConfig } from './../log.config';
 import { logsService } from './logs.service';
 
-describe(CommonConfig.serviceDescribe, () => {
+describe(LogConfig.serviceDescribe, () => {
   let service: logsService;
 
   beforeEach(async () => {
