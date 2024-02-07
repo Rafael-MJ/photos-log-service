@@ -1,5 +1,9 @@
-import { Schema } from 'mongoose';
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
-export const MachineSchema = new Schema({
-  name: String,
-});
+@Schema()
+class Machine {
+  @Prop({ required: true })
+  name: string;
+}
+
+export const MachineSchema = SchemaFactory.createForClass(Machine);
