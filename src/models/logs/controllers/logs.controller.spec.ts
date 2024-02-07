@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ConnectionConfig } from 'src/connection.config';
+import { CommonConfig } from 'src/common/config';
+import { LogConfig } from '../log.config';
 import { LogsController } from './logs.controller';
 
-describe(ConnectionConfig.controllerDescribe, () => {
+describe(LogConfig.controllerDescribe, () => {
   let controller: LogsController;
 
   beforeEach(async () => {

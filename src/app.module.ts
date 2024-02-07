@@ -1,19 +1,18 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { LogsController } from './Controllers/photos-log/logs.controller';
-import { logsService } from './Services/photos-log/logs.service';
-import { LogRepository } from './Mongo/Repository/log.repository';
-import { LogSchema } from './Mongo/Schemas/log.schema';
-import { ConnectionConfig } from './connection.config';
+import { LogConfig } from './models/logs/log.config';
+import { LogsController } from './models/logs/controllers/logs.controller';
+import { logsService } from './models/logs/services/logs.service';
+import { LogRepository } from './models/logs/log.repository';
+import { LogSchema } from './models/logs/schemas/log.schema';
+import { CommonConfig } from './common/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(ConnectionConfig.connURL),
+    MongooseModule.forRoot(CommonConfig.mongoConnectionURL),
 
-    MongooseModule.forFeature([
-      { name: ConnectionConfig.modelSchemaDefinition, schema: LogSchema },
-    ]),
+    MongooseModule.forFeature([{ name: LogConfig.modelSchemaDefinition, schema: LogSchema }]),
   ],
   controllers: [LogsController],
   providers: [logsService, LogRepository],

@@ -1,11 +1,11 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
-import { ConnectionConfig } from 'src/connection.config';
-import { Log } from 'src/Mongo/Interfaces/log.interface';
-import { logsService } from '../../Services/photos-log/logs.service';
-import { LogDTO } from '../../DTO/logs.dto';
+import { Log } from 'src/models/logs/interfaces/log.interface';
+import { logsService } from '../services/logs.service';
+import { LogDTO } from '../dto/logs.dto';
+import { LogConfig } from '../log.config';
 
-@Controller(ConnectionConfig.controllerDefinition)
+@Controller(LogConfig.controllerDefinition)
 export class LogsController {
   constructor(private readonly logsService: logsService) {}
 

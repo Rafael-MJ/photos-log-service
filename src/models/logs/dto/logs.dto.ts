@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsNumber, IsPositive, ValidateNested, IsDateString } from 'class-validator';
 import { Type } from 'class-transformer';
 
-import { MachineDTO } from './machine.dto';
+import { MachineDTO } from '../../machines/dto/machine.dto';
 
 export class LogDTO {
   @IsNotEmpty()

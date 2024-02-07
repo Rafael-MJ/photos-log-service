@@ -3,14 +3,14 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
 
-import { ConnectionConfig } from 'src/connection.config';
-import { LogDTO } from 'src/DTO/logs.dto';
-import { Log } from '../Interfaces/log.interface';
+import { LogDTO } from 'src/models/logs/dto/logs.dto';
+import { Log } from './interfaces/log.interface';
+import { LogConfig } from './log.config';
 
 @Injectable()
 export class LogRepository {
   constructor(
-    @InjectModel(ConnectionConfig.modelSchemaDefinition) private readonly logModel: Model<Log>,
+    @InjectModel(LogConfig.modelSchemaDefinition) private readonly logModel: Model<Log>,
   ) {}
 
   async saveLog(newlog: LogDTO): Promise<Log> {
