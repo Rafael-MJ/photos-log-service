@@ -63,4 +63,12 @@ export class logsService {
 
     return foundLogs;
   }
+
+  async getLogsByEstablishment(machineName: string): Promise<Log[]> {
+    const foundLogs = await this.logRepository.getLogsByEstablishment(machineName);
+
+    if (!foundLogs.length) throw new BadRequestException('No results for this establishment');
+
+    return foundLogs;
+  }
 }

@@ -6,7 +6,7 @@ class Machine {
   name: string;
 
   @Prop({ required: true })
-  currentEstablishment: string;
+  establishment: string;
 
   @Prop({ required: true })
   localMachineNumber: number;

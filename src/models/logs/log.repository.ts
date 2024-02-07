@@ -43,4 +43,13 @@ export class LogRepository {
       { __v: false },
     );
   }
+
+  async getLogsByEstablishment(machineName: string): Promise<Log[]> {
+    return await this.logModel.find(
+      {
+        'machine.establishment': { $regex: machineName, $options: 'i' },
+      },
+      { __v: false },
+    );
+  }
 }

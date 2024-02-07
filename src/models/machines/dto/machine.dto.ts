@@ -9,7 +9,7 @@ export class MachineDTO {
   @IsNotEmpty()
   @IsString()
   @Length(2, 50)
-  readonly currentEstablishment: string;
+  readonly establishment: string;
 
   @IsNumber()
   @IsPositive()

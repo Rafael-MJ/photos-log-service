@@ -24,6 +24,11 @@ export class LogsController {
     return await this.logsService.getLogsByMachineName(machineName);
   }
 
+  @Get('establishment/:establishment')
+  async getLogsByEstablishment(@Param('establishment') establishment: string): Promise<Log[]> {
+    return await this.logsService.getLogsByEstablishment(establishment);
+  }
+
   @Post()
   async saveLog(@Body() newLog: LogDTO): Promise<Log> {
     return await this.logsService.saveLog(newLog);
