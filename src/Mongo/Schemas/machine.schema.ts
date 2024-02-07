@@ -1,5 +1,5 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 export const MachineSchema = new Schema({
-    name: String,
+  name: String,
 });

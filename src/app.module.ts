@@ -9,16 +9,13 @@ import { ConnectionConfig } from './connection.config';
 
 @Module({
   imports: [
-
     MongooseModule.forRoot(ConnectionConfig.connURL),
 
     MongooseModule.forFeature([
-      { name: ConnectionConfig.modelSchemaDefinition, schema: LogSchema}
-    ])
-
+      { name: ConnectionConfig.modelSchemaDefinition, schema: LogSchema },
+    ]),
   ],
   controllers: [LogsController],
   providers: [logsService, LogRepository],
 })
-
 export class AppModule {}

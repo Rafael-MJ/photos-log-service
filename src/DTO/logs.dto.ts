@@ -4,17 +4,17 @@ import { Type } from 'class-transformer';
 import { MachineDTO } from './machine.dto';
 
 export class LogDTO {
-    @IsNotEmpty()
-    @Type(() => MachineDTO)
-    @ValidateNested()
-    readonly machine: MachineDTO;
+  @IsNotEmpty()
+  @Type(() => MachineDTO)
+  @ValidateNested()
+  readonly machine: MachineDTO;
 
-    @IsNotEmpty()
-    @IsDateString()
-    readonly datetime: Date;
+  @IsNotEmpty()
+  @IsDateString()
+  readonly datetime: Date;
 
-    @IsNotEmpty()
-    @IsNumber()
-    @IsPositive()
-    readonly imagesCount: number;
+  @IsNotEmpty()
+  @IsNumber()
+  @IsPositive()
+  readonly imagesCount: number;
 }
