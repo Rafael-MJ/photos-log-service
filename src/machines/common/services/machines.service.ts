@@ -3,14 +3,10 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { MachineRepository } from '../../machine.repository';
 import { MachineDTO } from '../../dto/machines.dto';
 import { Machine } from '../../interfaces/machine.interface';
-import { MachinesService } from './../../services/machines.service';
 
 @Injectable()
 export class MachinesCommonService {
-  constructor(
-    private readonly machineRepository: MachineRepository,
-    private readonly machinesService: MachinesService,
-  ) {}
+  constructor(private readonly machineRepository: MachineRepository) {}
 
   async existsMachineByName(machineName: string): Promise<boolean> {
     const existMachine = await this.machineRepository.getMachineByName(machineName);

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
-import { Machine } from 'src/machines/interfaces/machine.interface';
+import { Machine } from '../../machines/interfaces/machine.interface';
 import { MachinesService } from '../services/machines.service';
 import { MachineDTO } from '../dto/machines.dto';
 import { MachineConfig } from '../machine.config';
