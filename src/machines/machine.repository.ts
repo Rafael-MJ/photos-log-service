@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
 
-import { MachineDTO } from 'src/models/machines/dto/machines.dto';
+import { MachineDTO } from 'src/machines/dto/machines.dto';
 import { Machine } from './interfaces/machine.interface';
 import { MachineConfig } from './machine.config';
 

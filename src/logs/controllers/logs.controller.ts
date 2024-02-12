@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
-import { Log } from 'src/models/logs/interfaces/log.interface';
+import { Log } from 'src/logs/interfaces/log.interface';
 import { LogsService } from '../services/logs.service';
 import { LogDTO } from '../dto/logs.dto';
 import { LogConfig } from '../log.config';

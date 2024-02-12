@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-import { MachineDTO } from 'src/models/machines/dto/machines.dto';
-import { Machine } from 'src/models/machines/interfaces/machine.interface';
+import { MachineDTO } from 'src/machines/dto/machines.dto';
+import { Machine } from 'src/machines/interfaces/machine.interface';
 import { MachineRepository } from '../machine.repository';
 
 @Injectable()

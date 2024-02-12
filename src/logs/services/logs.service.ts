@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-import { LogDTO } from 'src/models/logs/dto/logs.dto';
-import { Log } from 'src/models/logs/interfaces/log.interface';
-import { MachinesCommonService } from 'src/models/machines/common/services/machines.service';
+import { LogDTO } from 'src/logs/dto/logs.dto';
+import { Log } from 'src/logs/interfaces/log.interface';
+import { MachinesCommonService } from 'src/machines/common/services/machines.service';
 import { LogRepository } from '../log.repository';
 
 @Injectable()
