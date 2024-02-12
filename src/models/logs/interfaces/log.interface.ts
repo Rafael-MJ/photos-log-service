@@ -1,9 +1,13 @@
 import { Document } from 'mongoose';
-import * as mongoose from 'mongoose';
 
 export interface Log extends Document {
-  readonly _id: mongoose.Schema.Types.ObjectId;
-  readonly machine: object;
+  readonly machineName: String;
+  readonly usedPaper: number;
+  readonly usedInk: number;
   readonly datetime: Date;
-  readonly imagesCount: number;
+  readonly printedImagesCount: number;
+  readonly establishment: string;
+  readonly city: string;
+  readonly province: string;
+  readonly localMachineNumber: number;
 }

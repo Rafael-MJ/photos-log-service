@@ -38,16 +38,16 @@ export class LogRepository {
   async getLogsByMachineName(machineName: string): Promise<Log[]> {
     return await this.logModel.find(
       {
-        'machine.name': { $regex: machineName, $options: 'i' },
+        machineName: { $regex: machineName, $options: 'i' },
       },
       { __v: false },
     );
   }
 
-  async getLogsByEstablishment(machineName: string): Promise<Log[]> {
+  async getLogsByEstablishment(establishment: string): Promise<Log[]> {
     return await this.logModel.find(
       {
-        'machine.establishment': { $regex: machineName, $options: 'i' },
+        establishment: { $regex: establishment, $options: 'i' },
       },
       { __v: false },
     );

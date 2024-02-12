@@ -2,11 +2,15 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 
 import { LogDTO } from 'src/models/logs/dto/logs.dto';
 import { Log } from 'src/models/logs/interfaces/log.interface';
+import { MachinesCommonService } from 'src/models/machines/common/services/machines.service';
 import { LogRepository } from '../log.repository';
 
 @Injectable()
-export class logsService {
-  constructor(private readonly logRepository: LogRepository) {}
+export class LogsService {
+  constructor(
+    private readonly logRepository: LogRepository,
+    private readonly machinesService: MachinesCommonService,
+  ) {}
 
   async getAllLogs(): Promise<Log[]> {
     const allLogs = await this.logRepository.getAllLogs();
@@ -17,7 +21,27 @@ export class logsService {
   }
 
   async saveLog(newLog: LogDTO): Promise<Log> {
-    return await this.logRepository.saveLog(newLog);
+    const existMachine = await this.machinesService.existsMachineByName(newLog.machineName);
+
+    if (existMachine) {
+      const existMachineModel = await this.machinesService.getMachineByName(newLog.machineName);
+
+      const updatedMachineData = {
+        name: existMachineModel.name,
+        paperStock: existMachineModel.paperStock - newLog.usedPaper,
+        inkStock: existMachineModel.inkStock - newLog.usedInk,
+        currentEstablishment: newLog.establishment,
+        currentCity: newLog.city,
+        currentProvince: newLog.province,
+        currentLocalMachineNumber: newLog.localMachineNumber,
+      };
+
+      await this.machinesService.updateMachineByName(newLog.machineName, updatedMachineData);
+
+      return await this.logRepository.saveLog(newLog);
+    }
+
+    throw new BadRequestException('Machine does not exist');
   }
 
   async getLogById(logID: string): Promise<Log> {
@@ -28,7 +52,7 @@ export class logsService {
 
       return existLog;
     } catch (error) {
-      throw new BadRequestException('There are no results');
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -40,34 +64,37 @@ export class logsService {
 
       return existLog;
     } catch (error) {
-      throw new BadRequestException('This log does not exists');
+      throw new BadRequestException(error.message);
     }
   }
 
   async updateLogById(logID: string, newLog: LogDTO): Promise<Log> {
-    const existLog = await this.logRepository.getLogById(logID);
+    try {
+      const existLog = await this.logRepository.getLogById(logID);
 
-    if (!existLog) throw new BadRequestException('There are no results');
+      if (!existLog) throw new BadRequestException('There are no results');
 
-    const updatedLog = await this.logRepository.updateLogById(logID, newLog);
+      await this.logRepository.updateLogById(logID, newLog);
 
-    if (updatedLog) return this.logRepository.getLogById(logID);
-
-    throw new BadRequestException('Error in update');
+      return this.logRepository.getLogById(logID);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   async getLogsByMachineName(machineName: string): Promise<Log[]> {
     const foundLogs = await this.logRepository.getLogsByMachineName(machineName);
 
-    if (!foundLogs.length) throw new BadRequestException('No results for this machine');
+    if (!foundLogs.length) throw new BadRequestException('There are no results for this machine');
 
     return foundLogs;
   }
 
-  async getLogsByEstablishment(machineName: string): Promise<Log[]> {
-    const foundLogs = await this.logRepository.getLogsByEstablishment(machineName);
+  async getLogsByEstablishment(establishment: string): Promise<Log[]> {
+    const foundLogs = await this.logRepository.getLogsByEstablishment(establishment);
 
-    if (!foundLogs.length) throw new BadRequestException('No results for this establishment');
+    if (!foundLogs.length)
+      throw new BadRequestException('There are no results for this establishment');
 
     return foundLogs;
   }

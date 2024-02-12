@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
 import { Log } from 'src/models/logs/interfaces/log.interface';
-import { logsService } from '../services/logs.service';
+import { LogsService } from '../services/logs.service';
 import { LogDTO } from '../dto/logs.dto';
 import { LogConfig } from '../log.config';
 
 @Controller(LogConfig.controllerDefinition)
 export class LogsController {
-  constructor(private readonly logsService: logsService) {}
+  constructor(private readonly logsService: LogsService) {}
 
   @Get()
   async getAllLogs(): Promise<Log[]> {
@@ -34,12 +34,12 @@ export class LogsController {
     return await this.logsService.saveLog(newLog);
   }
 
-  @Patch(':logID')
+  @Patch('id/:logID')
   async updateLogById(@Param('logID') logID: string, @Body() newLog: LogDTO): Promise<Log> {
     return await this.logsService.updateLogById(logID, newLog);
   }
 
-  @Delete(':logID')
+  @Delete('id/:logID')
   async deletelogById(@Param('logID') logID: string): Promise<Log> {
     return await this.logsService.deletelogById(logID);
   }

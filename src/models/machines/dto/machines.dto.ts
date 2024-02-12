@@ -7,13 +7,19 @@ export class MachineDTO {
   readonly name: string;
 
   @IsNotEmpty()
-  @IsString()
-  @Length(2, 50)
-  readonly establishment: string;
-
   @IsNumber()
   @IsPositive()
-  readonly localMachineNumber: number;
+  readonly paperStock: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @IsPositive()
+  readonly inkStock: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @Length(2, 50)
+  readonly currentEstablishment: string;
 
   @IsNotEmpty()
   @IsString()
@@ -24,4 +30,8 @@ export class MachineDTO {
   @IsString()
   @Length(2, 2)
   readonly currentProvince: string;
+
+  @IsNumber()
+  @IsPositive()
+  readonly currentLocalMachineNumber: number;
 }

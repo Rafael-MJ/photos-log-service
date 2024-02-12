@@ -1,21 +1,27 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema({ _id: false })
+@Schema()
 class Machine {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true, lowercase: true, trim: true })
   name: string;
 
-  @Prop({ required: true })
-  establishment: string;
+  @Prop({ required: true, type: Number })
+  paperStock: number;
 
-  @Prop({ required: true })
-  localMachineNumber: number;
+  @Prop({ required: true, type: Number })
+  inkStock: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, type: String })
+  currentEstablishment: string;
+
+  @Prop({ required: true, type: String })
   currentCity: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, type: String })
   currentProvince: string;
+
+  @Prop({ required: false, type: Number })
+  currentLocalMachineNumber: number;
 }
 
 export const MachineSchema = SchemaFactory.createForClass(Machine);
