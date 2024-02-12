@@ -2,7 +2,7 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 class Log {
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, lowercase: true, trim: true })
   machineName: string;
 
   @Prop({ required: true, type: Number })
