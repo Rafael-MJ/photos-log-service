@@ -1,6 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema()
+@Schema({ versionKey: false })
 class Machine {
   @Prop({ required: true, unique: true, lowercase: true, trim: true })
   name: string;

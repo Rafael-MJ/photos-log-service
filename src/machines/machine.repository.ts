@@ -19,11 +19,11 @@ export class MachineRepository {
   }
 
   async getAllMachines(): Promise<Machine[]> {
-    return await this.machineModel.find({}, { __v: false }).sort({ name: +1 }).exec();
+    return await this.machineModel.find({}).sort({ name: +1 }).exec();
   }
 
   async getMachineByName(machineName: string): Promise<Machine> {
-    return await this.machineModel.findOne({ name: machineName }, { __v: false });
+    return await this.machineModel.findOne({ name: machineName });
   }
 
   async deleteMachineByName(machineName: string): Promise<Machine> {
@@ -36,11 +36,8 @@ export class MachineRepository {
   }
 
   async getMachinesByEstablishment(establishment: string): Promise<Machine[]> {
-    return await this.machineModel.find(
-      {
-        currentEstablishment: { $regex: establishment, $options: 'i' },
-      },
-      { __v: false },
-    );
+    return await this.machineModel.find({
+      currentEstablishment: { $regex: establishment, $options: 'i' },
+    });
   }
 }

@@ -19,11 +19,11 @@ export class LogRepository {
   }
 
   async getAllLogs(): Promise<Log[]> {
-    return await this.logModel.find({}, { __v: false }).sort({ name: +1 }).exec();
+    return await this.logModel.find({}).sort({ name: +1 }).exec();
   }
 
   async getLogById(logID: string): Promise<Log> {
-    return await this.logModel.findById(logID, { __v: false });
+    return await this.logModel.findById(logID);
   }
 
   async deleteLogById(logID: string): Promise<Log> {
@@ -36,20 +36,14 @@ export class LogRepository {
   }
 
   async getLogsByMachineName(machineName: string): Promise<Log[]> {
-    return await this.logModel.find(
-      {
-        machineName: { $regex: machineName, $options: 'i' },
-      },
-      { __v: false },
-    );
+    return await this.logModel.find({
+      machineName: { $regex: machineName, $options: 'i' },
+    });
   }
 
   async getLogsByEstablishment(establishment: string): Promise<Log[]> {
-    return await this.logModel.find(
-      {
-        establishment: { $regex: establishment, $options: 'i' },
-      },
-      { __v: false },
-    );
+    return await this.logModel.find({
+      establishment: { $regex: establishment, $options: 'i' },
+    });
   }
 }
