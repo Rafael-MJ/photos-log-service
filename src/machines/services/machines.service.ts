@@ -11,7 +11,7 @@ export class MachinesService {
   async getAllMachines(): Promise<Machine[]> {
     const allMachines = await this.machineRepository.getAllMachines();
 
-    if (!allMachines.length) throw new BadRequestException('There are no registers');
+    if (!allMachines.length) throw new BadRequestException('There are no registers for machines');
 
     return allMachines;
   }
@@ -21,7 +21,7 @@ export class MachinesService {
 
     if (!existMachine) return await this.machineRepository.saveMachine(newMachine);
 
-    throw new BadRequestException('Machine already exists');
+    throw new BadRequestException('This machine already exists');
   }
 
   async deleteMachineByName(machineName: string): Promise<Machine> {

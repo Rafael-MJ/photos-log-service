@@ -15,7 +15,7 @@ export class LogsService {
   async getAllLogs(): Promise<Log[]> {
     const allLogs = await this.logRepository.getAllLogs();
 
-    if (!allLogs.length) throw new BadRequestException('There are no registers');
+    if (!allLogs.length) throw new BadRequestException('There are no registers for logs');
 
     return allLogs;
   }
@@ -39,14 +39,14 @@ export class LogsService {
       return await this.logRepository.saveLog(newLog);
     }
 
-    throw new BadRequestException('Machine does not exist');
+    throw new BadRequestException('This machine does not exist');
   }
 
   async getLogById(logID: string): Promise<Log> {
     try {
       const existLog = await this.logRepository.getLogById(logID);
 
-      if (!existLog) throw new BadRequestException('There are no results');
+      if (!existLog) throw new BadRequestException('There are no results for this log ID');
 
       return existLog;
     } catch (error) {
@@ -58,7 +58,7 @@ export class LogsService {
     try {
       const existLog = await this.logRepository.deleteLogById(logID);
 
-      if (!existLog) throw new BadRequestException('There are no results');
+      if (!existLog) throw new BadRequestException('There are no results for this log ID');
 
       return existLog;
     } catch (error) {
@@ -70,7 +70,7 @@ export class LogsService {
     try {
       const existLog = await this.logRepository.getLogById(logID);
 
-      if (!existLog) throw new BadRequestException('There are no results');
+      if (!existLog) throw new BadRequestException('There are no results for this log');
 
       await this.logRepository.updateLogById(logID, newLog);
 

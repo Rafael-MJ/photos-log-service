@@ -11,7 +11,7 @@ export class MachinesCommonService {
   async getMachineByName(machineName: string): Promise<Machine> {
     const existMachine = await this.machineRepository.getMachineByName(machineName);
 
-    if (!existMachine) throw new BadRequestException('There are no results');
+    if (!existMachine) throw new BadRequestException('There are no results for this machine name');
 
     return existMachine;
   }
@@ -20,7 +20,7 @@ export class MachinesCommonService {
     try {
       const existMachine = await this.machineRepository.getMachineById(machineId);
 
-      if (!existMachine) throw new BadRequestException('There are no results');
+      if (!existMachine) throw new BadRequestException('There are no results for this machine ID');
 
       return existMachine;
     } catch (error) {
@@ -32,7 +32,7 @@ export class MachinesCommonService {
     try {
       const existMachine = await this.machineRepository.getMachineByName(machineName);
 
-      if (!existMachine) throw new BadRequestException('There are no results');
+      if (!existMachine) throw new BadRequestException('There are no results for this machine');
 
       await this.machineRepository.updateMachineByName(machineName, newMachine);
 
