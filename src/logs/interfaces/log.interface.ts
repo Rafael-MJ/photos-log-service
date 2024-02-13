@@ -1,7 +1,8 @@
 import { Document } from 'mongoose';
+import { Machine } from '../../machines/interfaces/machine.interface';
 
 export interface Log extends Document {
-  readonly machineName: String;
+  readonly machineId: Machine;
   readonly usedPaper: number;
   readonly usedInk: number;
   readonly datetime: Date;

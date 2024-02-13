@@ -1,37 +1,37 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString, Length } from 'class-validator';
+import * as validator from 'class-validator';
 
 export class MachineDTO {
-  @IsNotEmpty()
-  @IsString()
-  @Length(2, 50)
+  @validator.IsNotEmpty()
+  @validator.IsString()
+  @validator.Length(2, 50)
   readonly name: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
+  @validator.IsNotEmpty()
+  @validator.IsNumber()
+  @validator.IsPositive()
   readonly paperStock: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
+  @validator.IsNotEmpty()
+  @validator.IsNumber()
+  @validator.IsPositive()
   readonly inkStock: number;
 
-  @IsNotEmpty()
-  @IsString()
-  @Length(2, 50)
+  @validator.IsNotEmpty()
+  @validator.IsString()
+  @validator.Length(2, 50)
   readonly currentEstablishment: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @Length(2, 50)
+  @validator.IsNotEmpty()
+  @validator.IsString()
+  @validator.Length(2, 50)
   readonly currentCity: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @Length(2, 2)
+  @validator.IsNotEmpty()
+  @validator.IsString()
+  @validator.Length(2, 2)
   readonly currentProvince: string;
 
-  @IsNumber()
-  @IsPositive()
+  @validator.IsNumber()
+  @validator.IsPositive()
   readonly currentLocalMachineNumber: number;
 }

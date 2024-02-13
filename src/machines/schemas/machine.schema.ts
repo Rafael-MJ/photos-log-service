@@ -20,7 +20,7 @@ class Machine {
   @Prop({ required: true, type: String })
   currentProvince: string;
 
-  @Prop({ required: false, type: Number })
+  @Prop({ required: false, default: 0, type: Number })
   currentLocalMachineNumber: number;
 }
 

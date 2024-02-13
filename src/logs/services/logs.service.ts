@@ -21,22 +21,20 @@ export class LogsService {
   }
 
   async saveLog(newLog: LogDTO): Promise<Log> {
-    const existMachine = await this.machinesService.existsMachineByName(newLog.machineName);
+    const existMachine = await this.machinesService.getMachineById(newLog.machineId);
 
     if (existMachine) {
-      const existMachineModel = await this.machinesService.getMachineByName(newLog.machineName);
-
       const updatedMachineData = {
-        name: existMachineModel.name,
-        paperStock: existMachineModel.paperStock - newLog.usedPaper,
-        inkStock: existMachineModel.inkStock - newLog.usedInk,
+        name: existMachine.name,
+        paperStock: existMachine.paperStock - newLog.usedPaper,
+        inkStock: existMachine.inkStock - newLog.usedInk,
         currentEstablishment: newLog.establishment,
         currentCity: newLog.city,
         currentProvince: newLog.province,
         currentLocalMachineNumber: newLog.localMachineNumber,
       };
 
-      await this.machinesService.updateMachineByName(newLog.machineName, updatedMachineData);
+      await this.machinesService.updateMachineByName(existMachine.name, updatedMachineData);
 
       return await this.logRepository.saveLog(newLog);
     }

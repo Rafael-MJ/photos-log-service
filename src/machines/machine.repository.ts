@@ -26,6 +26,10 @@ export class MachineRepository {
     return await this.machineModel.findOne({ name: machineName });
   }
 
+  async getMachineById(machineId: Machine): Promise<Machine> {
+    return await this.machineModel.findById(machineId);
+  }
+
   async deleteMachineByName(machineName: string): Promise<Machine> {
     return this.machineModel.findOneAndDelete({ name: machineName });
   }

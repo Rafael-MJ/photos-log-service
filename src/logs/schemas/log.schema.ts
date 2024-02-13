@@ -1,9 +1,12 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
+import * as mongoose from 'mongoose';
+import { Machine } from '../../machines/interfaces/machine.interface';
+
 @Schema({ versionKey: false })
 class Log {
-  @Prop({ type: String, required: true, lowercase: true, trim: true })
-  machineName: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Machine' })
+  machineId: Machine;
 
   @Prop({ required: true, type: Number })
   usedPaper: number;
@@ -26,7 +29,7 @@ class Log {
   @Prop({ required: true, type: String })
   province: string;
 
-  @Prop({ required: false, type: Number })
+  @Prop({ required: false, default: 0, type: Number })
   localMachineNumber: number;
 }
 

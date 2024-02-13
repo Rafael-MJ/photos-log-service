@@ -8,19 +8,24 @@ import { Machine } from '../../interfaces/machine.interface';
 export class MachinesCommonService {
   constructor(private readonly machineRepository: MachineRepository) {}
 
-  async existsMachineByName(machineName: string): Promise<boolean> {
-    const existMachine = await this.machineRepository.getMachineByName(machineName);
-
-    if (!existMachine) return false;
-    else return true;
-  }
-
   async getMachineByName(machineName: string): Promise<Machine> {
     const existMachine = await this.machineRepository.getMachineByName(machineName);
 
     if (!existMachine) throw new BadRequestException('There are no results');
 
     return existMachine;
+  }
+
+  async getMachineById(machineId: Machine): Promise<Machine> {
+    try {
+      const existMachine = await this.machineRepository.getMachineById(machineId);
+
+      if (!existMachine) throw new BadRequestException('There are no results');
+
+      return existMachine;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   async updateMachineByName(machineName: string, newMachine: MachineDTO): Promise<Machine> {

@@ -1,46 +1,46 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsDateString, IsString, Length } from 'class-validator';
+import * as validator from 'class-validator';
+import { Machine } from '../../machines/interfaces/machine.interface';
 
 export class LogDTO {
-  @IsNotEmpty()
-  @IsString()
-  @Length(2, 50)
-  readonly machineName: string;
+  @validator.IsNotEmpty()
+  @validator.IsMongoId()
+  readonly machineId: Machine;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
+  @validator.IsNotEmpty()
+  @validator.IsNumber()
+  @validator.IsPositive()
   readonly usedPaper: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
+  @validator.IsNotEmpty()
+  @validator.IsNumber()
+  @validator.IsPositive()
   readonly usedInk: number;
 
-  @IsNotEmpty()
-  @IsDateString()
+  @validator.IsNotEmpty()
+  @validator.IsDateString()
   readonly datetime: Date;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
+  @validator.IsNotEmpty()
+  @validator.IsNumber()
+  @validator.IsPositive()
   readonly printedImagesCount: number;
 
-  @IsNotEmpty()
-  @IsString()
-  @Length(2, 50)
+  @validator.IsNotEmpty()
+  @validator.IsString()
+  @validator.Length(2, 50)
   readonly establishment: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @Length(2, 50)
+  @validator.IsNotEmpty()
+  @validator.IsString()
+  @validator.Length(2, 50)
   readonly city: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @Length(2, 2)
+  @validator.IsNotEmpty()
+  @validator.IsString()
+  @validator.Length(2, 2)
   readonly province: string;
 
-  @IsNumber()
-  @IsPositive()
+  @validator.IsNumber()
+  @validator.IsPositive()
   readonly localMachineNumber: number;
 }
