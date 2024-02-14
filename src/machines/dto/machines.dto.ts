@@ -1,4 +1,5 @@
 import * as validator from 'class-validator';
+import { Establishment } from '../../establishments/interfaces/establishment.interface';
 
 export class MachineDTO {
   @validator.IsNotEmpty()
@@ -17,17 +18,6 @@ export class MachineDTO {
   readonly printerInkStock: number;
 
   @validator.IsNotEmpty()
-  @validator.IsString()
-  @validator.Length(2, 50)
-  readonly currentEstablishment: string;
-
-  @validator.IsNotEmpty()
-  @validator.IsString()
-  @validator.Length(2, 50)
-  readonly currentCity: string;
-
-  @validator.IsNotEmpty()
-  @validator.IsString()
-  @validator.Length(2, 2)
-  readonly currentProvince: string;
+  @validator.IsMongoId()
+  readonly currentEstablishmentId: Establishment;
 }

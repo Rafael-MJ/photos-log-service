@@ -1,12 +1,17 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
+import { Establishment } from '../../establishments/interfaces/establishment.interface';
 import { MachineDTO } from '../../machines/dto/machines.dto';
 import { Machine } from '../../machines/interfaces/machine.interface';
 import { MachineRepository } from '../machine.repository';
+import { EstablishmentsService } from '../../establishments/services/establishments.service';
 
 @Injectable()
 export class MachinesService {
-  constructor(private readonly machineRepository: MachineRepository) {}
+  constructor(
+    private readonly machineRepository: MachineRepository,
+    private readonly establishmentsService: EstablishmentsService,
+  ) {}
 
   async getAllMachines(): Promise<Machine[]> {
     const allMachines = await this.machineRepository.getAllMachines();
@@ -19,7 +24,11 @@ export class MachinesService {
   async saveMachine(newMachine: MachineDTO): Promise<Machine> {
     const existMachine = await this.machineRepository.getMachineByName(newMachine.name);
 
-    if (!existMachine) return await this.machineRepository.saveMachine(newMachine);
+    if (!existMachine) {
+      await this.establishmentsService.getEstablishmentById(newMachine.currentEstablishmentId);
+
+      return await this.machineRepository.saveMachine(newMachine);
+    }
 
     throw new BadRequestException('This machine already exists');
   }
@@ -66,12 +75,16 @@ export class MachinesService {
     return existMachine;
   }
 
-  async getMachinesByEstablishment(establishment: string): Promise<Machine[]> {
-    const foundMachines = await this.machineRepository.getMachinesByEstablishment(establishment);
+  async getMachinesByEstablishment(establishment: Establishment): Promise<Machine[]> {
+    try {
+      const foundMachines = await this.machineRepository.getMachinesByEstablishment(establishment);
 
-    if (!foundMachines.length)
-      throw new BadRequestException('There are no results for this establishment');
+      if (!foundMachines.length)
+        throw new BadRequestException('There are no results for this establishment');
 
-    return foundMachines;
+      return foundMachines;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }

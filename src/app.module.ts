@@ -12,6 +12,11 @@ import { MachineSchema } from './machines/schemas/machine.schema';
 import { MachinesController } from './machines/controllers/machines.controller';
 import { MachinesService } from './machines/services/machines.service';
 import { MachineRepository } from './machines/machine.repository';
+import { EstablishmentConfig } from './establishments/establishment.config';
+import { EstablishmentSchema } from './establishments/schemas/establishment.schema';
+import { EstablishmentsController } from './establishments/controllers/establishments.controller';
+import { EstablishmentsService } from './establishments/services/establishments.service';
+import { EstablishmentRepository } from './establishments/establishment.repository';
 
 @Module({
   imports: [
@@ -20,9 +25,17 @@ import { MachineRepository } from './machines/machine.repository';
     MongooseModule.forFeature([
       { name: LogConfig.modelSchemaDefinition, schema: LogSchema },
       { name: MachineConfig.modelSchemaDefinition, schema: MachineSchema },
+      { name: EstablishmentConfig.modelSchemaDefinition, schema: EstablishmentSchema },
     ]),
   ],
-  controllers: [LogsController, MachinesController],
-  providers: [LogsService, LogRepository, MachinesService, MachineRepository],
+  controllers: [LogsController, MachinesController, EstablishmentsController],
+  providers: [
+    LogsService,
+    LogRepository,
+    MachinesService,
+    MachineRepository,
+    EstablishmentsService,
+    EstablishmentRepository,
+  ],
 })
 export class AppModule {}

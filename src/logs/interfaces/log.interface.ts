@@ -1,5 +1,6 @@
 import { Document } from 'mongoose';
 import { Machine } from '../../machines/interfaces/machine.interface';
+import { Establishment } from '../../establishments/interfaces/establishment.interface';
 
 export interface Log extends Document {
   readonly machineId: Machine;
@@ -7,7 +8,5 @@ export interface Log extends Document {
   readonly usedPrinterInk: number;
   readonly datetime: Date;
   readonly printedImagesCount: number;
-  readonly establishment: string;
-  readonly city: string;
-  readonly province: string;
+  readonly establishmentId: Establishment;
 }

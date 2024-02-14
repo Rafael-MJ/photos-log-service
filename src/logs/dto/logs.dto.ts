@@ -1,5 +1,6 @@
 import * as validator from 'class-validator';
 import { Machine } from '../../machines/interfaces/machine.interface';
+import { Establishment } from '../../establishments/interfaces/establishment.interface';
 
 export class LogDTO {
   @validator.IsNotEmpty()
@@ -25,18 +26,6 @@ export class LogDTO {
   @validator.IsPositive()
   readonly printedImagesCount: number;
 
-  @validator.IsNotEmpty()
-  @validator.IsString()
-  @validator.Length(2, 50)
-  readonly establishment: string;
-
-  @validator.IsNotEmpty()
-  @validator.IsString()
-  @validator.Length(2, 50)
-  readonly city: string;
-
-  @validator.IsNotEmpty()
-  @validator.IsString()
-  @validator.Length(2, 2)
-  readonly province: string;
+  @validator.IsEmpty()
+  readonly establishmentId: Establishment;
 }

@@ -5,6 +5,7 @@ import { Machine } from '../../machines/interfaces/machine.interface';
 import { LogDTO } from '../../logs/dto/logs.dto';
 import { Log } from '../../logs/interfaces/log.interface';
 import { LogRepository } from '../log.repository';
+import { MachineDTO } from '../../machines/dto/machines.dto';
 
 @Injectable()
 export class LogsService {
@@ -24,29 +25,28 @@ export class LogsService {
   async saveLog(newLog: LogDTO): Promise<Log> {
     const existMachine = await this.machinesService.getMachineById(newLog.machineId);
 
-    if (existMachine) {
-      const updatedMachineData = {
-        name: existMachine.name,
-        paperStock: existMachine.paperStock - newLog.usedPaperCount,
-        printerInkStock: existMachine.printerInkStock - newLog.usedPrinterInk,
-        currentEstablishment: newLog.establishment,
-        currentCity: newLog.city,
-        currentProvince: newLog.province,
-      };
+    const updatedMachineData: MachineDTO = {
+      name: existMachine.name,
+      paperStock: existMachine.paperStock - newLog.usedPaperCount,
+      printerInkStock: existMachine.printerInkStock - newLog.usedPrinterInk,
+      currentEstablishmentId: existMachine.currentEstablishmentId,
+    };
 
-      if (updatedMachineData.paperStock < 0 && updatedMachineData.printerInkStock < 0)
-        throw new BadRequestException('Machine stock is completely empty');
-      else if (updatedMachineData.paperStock < 0)
-        throw new BadRequestException("The machine doesn't have enough paper stock");
-      else if (updatedMachineData.printerInkStock < 0)
-        throw new BadRequestException("The machine doesn't have enough printer ink stock");
+    if (updatedMachineData.paperStock < 0 && updatedMachineData.printerInkStock < 0)
+      throw new BadRequestException('Unavailable stock');
+    else if (updatedMachineData.paperStock < 0)
+      throw new BadRequestException("The machine doesn't have enough paper stock");
+    else if (updatedMachineData.printerInkStock < 0)
+      throw new BadRequestException("The machine doesn't have enough printer ink stock");
 
-      await this.machinesService.updateMachineByName(existMachine.name, updatedMachineData);
+    await this.machinesService.updateMachineByName(existMachine.name, updatedMachineData);
 
-      return await this.logRepository.saveLog(newLog);
-    }
+    const updatedlogData: LogDTO = {
+      ...newLog,
+      establishmentId: existMachine.currentEstablishmentId,
+    };
 
-    throw new BadRequestException('This machine does not exist');
+    return await this.logRepository.saveLog(updatedlogData);
   }
 
   async getLogById(logID: string): Promise<Log> {
@@ -101,11 +101,15 @@ export class LogsService {
   }
 
   async getLogsByEstablishment(establishment: string): Promise<Log[]> {
-    const foundLogs = await this.logRepository.getLogsByEstablishment(establishment);
+    try {
+      const foundLogs = await this.logRepository.getLogsByEstablishment(establishment);
 
-    if (!foundLogs.length)
-      throw new BadRequestException('There are no results for this establishment');
+      if (!foundLogs.length)
+        throw new BadRequestException('There are no results for this establishment');
 
-    return foundLogs;
+      return foundLogs;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }

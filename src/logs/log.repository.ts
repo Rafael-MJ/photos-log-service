@@ -43,7 +43,7 @@ export class LogRepository {
 
   async getLogsByEstablishment(establishment: string): Promise<Log[]> {
     return await this.logModel.find({
-      establishment: { $regex: establishment, $options: 'i' },
+      establishmentId: establishment,
     });
   }
 }

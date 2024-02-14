@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
+import { Establishment } from '../establishments/interfaces/establishment.interface';
 import { MachineDTO } from '../machines/dto/machines.dto';
 import { Machine } from './interfaces/machine.interface';
 import { MachineConfig } from './machine.config';
@@ -38,9 +39,9 @@ export class MachineRepository {
     return updatedMachine.modifiedCount;
   }
 
-  async getMachinesByEstablishment(establishment: string): Promise<Machine[]> {
+  async getMachinesByEstablishment(establishment: Establishment): Promise<Machine[]> {
     return await this.machineModel.find({
-      currentEstablishment: { $regex: establishment, $options: 'i' },
+      currentEstablishmentId: establishment,
     });
   }
 }

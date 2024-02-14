@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
 import { Machine } from '../../machines/interfaces/machine.interface';
+import { Establishment } from '../../establishments/interfaces/establishment.interface';
 import { MachinesService } from '../services/machines.service';
 import { MachineDTO } from '../dto/machines.dto';
 import { MachineConfig } from '../machine.config';
@@ -31,7 +32,7 @@ export class MachinesController {
 
   @Get('establishment/:establishment')
   async getMachinesByEstablishment(
-    @Param('establishment') establishment: string,
+    @Param('establishment') establishment: Establishment,
   ): Promise<Machine[]> {
     return await this.machinesService.getMachinesByEstablishment(establishment);
   }
