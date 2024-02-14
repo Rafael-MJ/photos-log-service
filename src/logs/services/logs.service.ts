@@ -34,6 +34,13 @@ export class LogsService {
         currentProvince: newLog.province,
       };
 
+      if (updatedMachineData.paperStock < 0 && updatedMachineData.printerInkStock < 0)
+        throw new BadRequestException('Machine stock is completely empty');
+      else if (updatedMachineData.paperStock < 0)
+        throw new BadRequestException("The machine doesn't have enough paper stock");
+      else if (updatedMachineData.printerInkStock < 0)
+        throw new BadRequestException("The machine doesn't have enough printer ink stock");
+
       await this.machinesService.updateMachineByName(existMachine.name, updatedMachineData);
 
       return await this.logRepository.saveLog(newLog);

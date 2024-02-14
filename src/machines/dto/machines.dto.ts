@@ -8,12 +8,12 @@ export class MachineDTO {
 
   @validator.IsNotEmpty()
   @validator.IsNumber()
-  @validator.IsPositive()
+  @validator.Min(0)
   readonly paperStock: number;
 
   @validator.IsNotEmpty()
   @validator.IsNumber()
-  @validator.IsPositive()
+  @validator.Min(0)
   readonly printerInkStock: number;
 
   @validator.IsNotEmpty()
