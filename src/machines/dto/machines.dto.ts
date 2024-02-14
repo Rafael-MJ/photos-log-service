@@ -3,6 +3,10 @@ import { Establishment } from '../../establishments/interfaces/establishment.int
 
 export class MachineDTO {
   @validator.IsNotEmpty()
+  @validator.IsMongoId()
+  readonly currentEstablishmentId: Establishment;
+
+  @validator.IsNotEmpty()
   @validator.IsString()
   @validator.Length(2, 50)
   readonly name: string;
@@ -16,8 +20,4 @@ export class MachineDTO {
   @validator.IsNumber()
   @validator.Min(0)
   readonly printerInkStock: number;
-
-  @validator.IsNotEmpty()
-  @validator.IsMongoId()
-  readonly currentEstablishmentId: Establishment;
 }

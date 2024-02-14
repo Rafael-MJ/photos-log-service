@@ -7,6 +7,9 @@ export class LogDTO {
   @validator.IsMongoId()
   readonly machineId: Machine;
 
+  @validator.IsEmpty()
+  readonly establishmentId: Establishment;
+
   @validator.IsNotEmpty()
   @validator.IsNumber()
   @validator.IsPositive()
@@ -18,14 +21,11 @@ export class LogDTO {
   readonly usedPrinterInk: number;
 
   @validator.IsNotEmpty()
-  @validator.IsDateString()
-  readonly datetime: Date;
-
-  @validator.IsNotEmpty()
   @validator.IsNumber()
   @validator.IsPositive()
   readonly printedImagesCount: number;
 
-  @validator.IsEmpty()
-  readonly establishmentId: Establishment;
+  @validator.IsNotEmpty()
+  @validator.IsDateString()
+  readonly datetime: Date;
 }

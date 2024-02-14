@@ -26,10 +26,10 @@ export class LogsService {
     const existMachine = await this.machinesService.getMachineById(newLog.machineId);
 
     const updatedMachineData: MachineDTO = {
+      currentEstablishmentId: existMachine.currentEstablishmentId,
       name: existMachine.name,
       paperStock: existMachine.paperStock - newLog.usedPaperCount,
       printerInkStock: existMachine.printerInkStock - newLog.usedPrinterInk,
-      currentEstablishmentId: existMachine.currentEstablishmentId,
     };
 
     if (updatedMachineData.paperStock < 0 && updatedMachineData.printerInkStock < 0)

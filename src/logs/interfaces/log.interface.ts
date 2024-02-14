@@ -4,9 +4,9 @@ import { Establishment } from '../../establishments/interfaces/establishment.int
 
 export interface Log extends Document {
   readonly machineId: Machine;
+  readonly establishmentId: Establishment;
   readonly usedPaperCount: number;
   readonly usedPrinterInk: number;
-  readonly datetime: Date;
   readonly printedImagesCount: number;
-  readonly establishmentId: Establishment;
+  readonly datetime: Date;
 }
