@@ -9,7 +9,7 @@ class Machine {
   paperStock: number;
 
   @Prop({ required: true, type: Number })
-  inkStock: number;
+  printerInkStock: number;
 
   @Prop({ required: true, type: String })
   currentEstablishment: string;
@@ -21,7 +21,7 @@ class Machine {
   currentProvince: string;
 
   @Prop({ required: false, default: 0, type: Number })
-  currentLocalMachineNumber: number;
+  currentLocalMachineIndex: number;
 }
 
 export const MachineSchema = SchemaFactory.createForClass(Machine);

@@ -14,7 +14,7 @@ export class MachineDTO {
   @validator.IsNotEmpty()
   @validator.IsNumber()
   @validator.IsPositive()
-  readonly inkStock: number;
+  readonly printerInkStock: number;
 
   @validator.IsNotEmpty()
   @validator.IsString()
@@ -33,5 +33,5 @@ export class MachineDTO {
 
   @validator.IsNumber()
   @validator.IsPositive()
-  readonly currentLocalMachineNumber: number;
+  readonly currentLocalMachineIndex: number;
 }

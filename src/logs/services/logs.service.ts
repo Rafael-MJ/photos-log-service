@@ -27,12 +27,12 @@ export class LogsService {
     if (existMachine) {
       const updatedMachineData = {
         name: existMachine.name,
-        paperStock: existMachine.paperStock - newLog.usedPaper,
-        inkStock: existMachine.inkStock - newLog.usedInk,
+        paperStock: existMachine.paperStock - newLog.usedPaperCount,
+        printerInkStock: existMachine.printerInkStock - newLog.usedPrinterInk,
         currentEstablishment: newLog.establishment,
         currentCity: newLog.city,
         currentProvince: newLog.province,
-        currentLocalMachineNumber: newLog.localMachineNumber,
+        currentLocalMachineIndex: newLog.localMachineIndex,
       };
 
       await this.machinesService.updateMachineByName(existMachine.name, updatedMachineData);

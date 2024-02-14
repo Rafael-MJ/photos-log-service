@@ -9,10 +9,10 @@ class Log {
   machineId: Machine;
 
   @Prop({ required: true, type: Number })
-  usedPaper: number;
+  usedPaperCount: number;
 
   @Prop({ required: true, type: Number })
-  usedInk: number;
+  usedPrinterInk: number;
 
   @Prop({ required: true, type: Date })
   datetime: Date;
@@ -30,7 +30,7 @@ class Log {
   province: string;
 
   @Prop({ required: false, default: 0, type: Number })
-  localMachineNumber: number;
+  localMachineIndex: number;
 }
 
 export const LogSchema = SchemaFactory.createForClass(Log);

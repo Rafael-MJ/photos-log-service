@@ -9,12 +9,12 @@ export class LogDTO {
   @validator.IsNotEmpty()
   @validator.IsNumber()
   @validator.IsPositive()
-  readonly usedPaper: number;
+  readonly usedPaperCount: number;
 
   @validator.IsNotEmpty()
   @validator.IsNumber()
   @validator.IsPositive()
-  readonly usedInk: number;
+  readonly usedPrinterInk: number;
 
   @validator.IsNotEmpty()
   @validator.IsDateString()
@@ -42,5 +42,5 @@ export class LogDTO {
 
   @validator.IsNumber()
   @validator.IsPositive()
-  readonly localMachineNumber: number;
+  readonly localMachineIndex: number;
 }
