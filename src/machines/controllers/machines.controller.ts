@@ -4,14 +4,15 @@ import { Machine } from '../../machines/interfaces/machine.interface';
 import { MachinesService } from '../services/machines.service';
 import { MachineDTO } from '../dto/machines.dto';
 import { MachineConfig } from '../machine.config';
-import { MachinesCommonService } from '../common/services/machines.service';
 
 @Controller(MachineConfig.controllerDefinition)
 export class MachinesController {
-  constructor(
-    private readonly machinesService: MachinesService,
-    readonly machinesCommonService: MachinesCommonService,
-  ) {}
+  constructor(private readonly machinesService: MachinesService) {}
+
+  @Post()
+  async saveMachine(@Body() newMachine: MachineDTO): Promise<Machine> {
+    return await this.machinesService.saveMachine(newMachine);
+  }
 
   @Get()
   async getAllMachines(): Promise<Machine[]> {
@@ -20,12 +21,12 @@ export class MachinesController {
 
   @Get('id/:machineID')
   async getMachineById(@Param('machineID') machineName: Machine): Promise<Machine> {
-    return await this.machinesCommonService.getMachineById(machineName);
+    return await this.machinesService.getMachineById(machineName);
   }
 
   @Get('name/:machineName')
   async getMachineByName(@Param('machineName') machineName: string): Promise<Machine> {
-    return await this.machinesCommonService.getMachineByName(machineName);
+    return await this.machinesService.getMachineByName(machineName);
   }
 
   @Get('establishment/:establishment')
@@ -35,17 +36,12 @@ export class MachinesController {
     return await this.machinesService.getMachinesByEstablishment(establishment);
   }
 
-  @Post()
-  async saveMachine(@Body() newMachine: MachineDTO): Promise<Machine> {
-    return await this.machinesService.saveMachine(newMachine);
-  }
-
   @Patch('name/:machineName')
   async updateMachineByName(
     @Param('machineName') machineName: string,
     @Body() newMachine: MachineDTO,
   ): Promise<Machine> {
-    return await this.machinesCommonService.updateMachineByName(machineName, newMachine);
+    return await this.machinesService.updateMachineByName(machineName, newMachine);
   }
 
   @Delete('name/:machineName')

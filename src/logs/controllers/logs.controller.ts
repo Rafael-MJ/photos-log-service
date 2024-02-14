@@ -9,6 +9,11 @@ import { LogConfig } from '../log.config';
 export class LogsController {
   constructor(private readonly logsService: LogsService) {}
 
+  @Post()
+  async saveLog(@Body() newLog: LogDTO): Promise<Log> {
+    return await this.logsService.saveLog(newLog);
+  }
+
   @Get()
   async getAllLogs(): Promise<Log[]> {
     return await this.logsService.getAllLogs();
@@ -27,11 +32,6 @@ export class LogsController {
   @Get('establishment/:establishment')
   async getLogsByEstablishment(@Param('establishment') establishment: string): Promise<Log[]> {
     return await this.logsService.getLogsByEstablishment(establishment);
-  }
-
-  @Post()
-  async saveLog(@Body() newLog: LogDTO): Promise<Log> {
-    return await this.logsService.saveLog(newLog);
   }
 
   @Patch('id/:logID')

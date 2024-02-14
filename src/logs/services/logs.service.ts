@@ -1,15 +1,15 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
+import { MachinesService } from '../../machines/services/machines.service';
 import { LogDTO } from '../../logs/dto/logs.dto';
 import { Log } from '../../logs/interfaces/log.interface';
-import { MachinesCommonService } from '../../machines/common/services/machines.service';
 import { LogRepository } from '../log.repository';
 
 @Injectable()
 export class LogsService {
   constructor(
     private readonly logRepository: LogRepository,
-    private readonly machinesService: MachinesCommonService,
+    private readonly machinesService: MachinesService,
   ) {}
 
   async getAllLogs(): Promise<Log[]> {

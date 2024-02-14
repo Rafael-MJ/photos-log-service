@@ -1,3 +1,5 @@
+import { Document } from 'mongoose';
+
 export interface Machine extends Document {
   readonly name: string;
   readonly paperStock: number;

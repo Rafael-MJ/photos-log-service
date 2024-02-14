@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
-
 import { MachineDTO } from '../machines/dto/machines.dto';
 import { Machine } from './interfaces/machine.interface';
 import { MachineConfig } from './machine.config';

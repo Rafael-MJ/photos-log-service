@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
-
 import { LogDTO } from '../logs/dto/logs.dto';
 import { Log } from './interfaces/log.interface';
 import { LogConfig } from './log.config';
