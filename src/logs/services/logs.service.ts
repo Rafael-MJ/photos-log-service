@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
 import { MachinesService } from '../../machines/services/machines.service';
+import { Machine } from '../../machines/interfaces/machine.interface';
 import { LogDTO } from '../../logs/dto/logs.dto';
 import { Log } from '../../logs/interfaces/log.interface';
 import { LogRepository } from '../log.repository';
@@ -80,12 +81,17 @@ export class LogsService {
     }
   }
 
-  async getLogsByMachineName(machineName: string): Promise<Log[]> {
-    const foundLogs = await this.logRepository.getLogsByMachineName(machineName);
+  async getLogsByMachineId(machineId: Machine): Promise<Log[]> {
+    try {
+      const foundLogs = await this.logRepository.getLogsByMachineId(machineId);
 
-    if (!foundLogs.length) throw new BadRequestException('There are no results for this machine');
+      if (!foundLogs.length)
+        throw new BadRequestException('There are no results for this machine ID');
 
-    return foundLogs;
+      return foundLogs;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   async getLogsByEstablishment(establishment: string): Promise<Log[]> {

@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
 import { Log } from '../../logs/interfaces/log.interface';
+import { Machine } from '../../machines/interfaces/machine.interface';
 import { LogsService } from '../services/logs.service';
 import { LogDTO } from '../dto/logs.dto';
 import { LogConfig } from '../log.config';
@@ -24,9 +25,9 @@ export class LogsController {
     return await this.logsService.getLogById(logID);
   }
 
-  @Get('machine/:machineName')
-  async getLogsByMachineName(@Param('machineName') machineName: string): Promise<Log[]> {
-    return await this.logsService.getLogsByMachineName(machineName);
+  @Get('machine/:machineID')
+  async getLogsByMachineId(@Param('machineID') machineId: Machine): Promise<Log[]> {
+    return await this.logsService.getLogsByMachineId(machineId);
   }
 
   @Get('establishment/:establishment')
