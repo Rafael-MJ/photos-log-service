@@ -28,9 +28,6 @@ class Log {
 
   @Prop({ required: true, type: String })
   province: string;
-
-  @Prop({ required: false, default: 0, type: Number })
-  localMachineIndex: number;
 }
 
 export const LogSchema = SchemaFactory.createForClass(Log);

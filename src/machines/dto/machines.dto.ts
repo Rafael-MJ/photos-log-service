@@ -30,8 +30,4 @@ export class MachineDTO {
   @validator.IsString()
   @validator.Length(2, 2)
   readonly currentProvince: string;
-
-  @validator.IsNumber()
-  @validator.IsPositive()
-  readonly currentLocalMachineIndex: number;
 }

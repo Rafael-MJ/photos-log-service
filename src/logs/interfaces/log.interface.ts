@@ -10,5 +10,4 @@ export interface Log extends Document {
   readonly establishment: string;
   readonly city: string;
   readonly province: string;
-  readonly localMachineIndex: number;
 }

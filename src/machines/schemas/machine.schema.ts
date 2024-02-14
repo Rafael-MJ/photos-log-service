@@ -19,9 +19,6 @@ class Machine {
 
   @Prop({ required: true, type: String })
   currentProvince: string;
-
-  @Prop({ required: false, default: 0, type: Number })
-  currentLocalMachineIndex: number;
 }
 
 export const MachineSchema = SchemaFactory.createForClass(Machine);

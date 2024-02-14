@@ -39,8 +39,4 @@ export class LogDTO {
   @validator.IsString()
   @validator.Length(2, 2)
   readonly province: string;
-
-  @validator.IsNumber()
-  @validator.IsPositive()
-  readonly localMachineIndex: number;
 }

@@ -32,7 +32,6 @@ export class LogsService {
         currentEstablishment: newLog.establishment,
         currentCity: newLog.city,
         currentProvince: newLog.province,
-        currentLocalMachineIndex: newLog.localMachineIndex,
       };
 
       await this.machinesService.updateMachineByName(existMachine.name, updatedMachineData);

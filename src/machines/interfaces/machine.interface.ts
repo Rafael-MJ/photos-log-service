@@ -7,5 +7,4 @@ export interface Machine extends Document {
   readonly currentEstablishment: string;
   readonly currentCity: string;
   readonly currentProvince: string;
-  readonly currentLocalMachineIndex: number;
 }
