@@ -1,5 +1,5 @@
 import * as validator from 'class-validator';
-import { Establishment } from '../../establishments/interfaces/establishment.interface';
+import { Establishment } from '../../establishment/interfaces/establishment.interface';
 
 export class MachineDTO {
   @validator.IsNotEmpty()

@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-import { Establishment } from '../../establishments/interfaces/establishment.interface';
+import { Establishment } from '../../establishment/interfaces/establishment.interface';
 import { MachineDTO } from '../dto/machine.dto';
 import { Machine } from '../interfaces/machine.interface';
 import { MachineRepository } from '../machine.repository';
-import { EstablishmentsService } from '../../establishments/services/establishment.service';
+import { EstablishmentsService } from '../../establishment/services/establishment.service';
 
 @Injectable()
 export class MachinesService {

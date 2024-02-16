@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
-import { Establishment } from './../interfaces/establishment.interface';
+import { Establishment } from '../interfaces/establishment.interface';
 import { EstablishmentsService } from '../services/establishment.service';
 import { EstablishmentDTO } from '../dto/establishment.dto';
 import { EstablishmentConfig } from '../establishment.config';

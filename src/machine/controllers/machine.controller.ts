@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
 import { Machine } from '../interfaces/machine.interface';
-import { Establishment } from '../../establishments/interfaces/establishment.interface';
+import { Establishment } from '../../establishment/interfaces/establishment.interface';
 import { MachinesService } from '../services/machine.service';
 import { MachineDTO } from '../dto/machine.dto';
 import { MachineConfig } from '../machine.config';

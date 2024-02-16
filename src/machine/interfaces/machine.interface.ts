@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import { Establishment } from '../../establishments/interfaces/establishment.interface';
+import { Establishment } from '../../establishment/interfaces/establishment.interface';
 
 export interface Machine extends Document {
   readonly currentEstablishmentId: Establishment;

@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-import { EstablishmentDTO } from './../dto/establishment.dto';
-import { Establishment } from './../interfaces/establishment.interface';
+import { EstablishmentDTO } from '../dto/establishment.dto';
+import { Establishment } from '../interfaces/establishment.interface';
 import { EstablishmentRepository } from '../establishment.repository';
 
 @Injectable()
