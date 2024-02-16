@@ -2,13 +2,13 @@ import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/commo
 
 import { Machine } from '../interfaces/machine.interface';
 import { Establishment } from '../../establishment/interfaces/establishment.interface';
-import { MachinesService } from '../services/machine.service';
+import { MachineService } from '../services/machine.service';
 import { MachineDTO } from '../dto/machine.dto';
 import { MachineConfig } from '../machine.config';
 
 @Controller(MachineConfig.controllerDefinition)
-export class MachinesController {
-  constructor(private readonly machinesService: MachinesService) {}
+export class MachineController {
+  constructor(private readonly machinesService: MachineService) {}
 
   @Post()
   async saveMachine(@Body() newMachine: MachineDTO): Promise<Machine> {

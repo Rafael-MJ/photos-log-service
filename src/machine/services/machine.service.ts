@@ -4,13 +4,13 @@ import { Establishment } from '../../establishment/interfaces/establishment.inte
 import { MachineDTO } from '../dto/machine.dto';
 import { Machine } from '../interfaces/machine.interface';
 import { MachineRepository } from '../machine.repository';
-import { EstablishmentsService } from '../../establishment/services/establishment.service';
+import { EstablishmentService } from '../../establishment/services/establishment.service';
 
 @Injectable()
-export class MachinesService {
+export class MachineService {
   constructor(
     private readonly machineRepository: MachineRepository,
-    private readonly establishmentsService: EstablishmentsService,
+    private readonly establishmentsService: EstablishmentService,
   ) {}
 
   async getAllMachines(): Promise<Machine[]> {

@@ -2,13 +2,13 @@ import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/commo
 
 import { Log } from '../interfaces/log.interface';
 import { Machine } from '../../machine/interfaces/machine.interface';
-import { LogsService } from '../services/log.service';
+import { LogService } from '../services/log.service';
 import { LogDTO } from '../dto/log.dto';
 import { LogConfig } from '../log.config';
 
 @Controller(LogConfig.controllerDefinition)
-export class LogsController {
-  constructor(private readonly logsService: LogsService) {}
+export class LogController {
+  constructor(private readonly logsService: LogService) {}
 
   @Post()
   async saveLog(@Body() newLog: LogDTO): Promise<Log> {

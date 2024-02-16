@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 
 import { Establishment } from '../interfaces/establishment.interface';
-import { EstablishmentsService } from '../services/establishment.service';
+import { EstablishmentService } from '../services/establishment.service';
 import { EstablishmentDTO } from '../dto/establishment.dto';
 import { EstablishmentConfig } from '../establishment.config';
 
 @Controller(EstablishmentConfig.controllerDefinition)
-export class EstablishmentsController {
-  constructor(private readonly establishmentsService: EstablishmentsService) {}
+export class EstablishmentController {
+  constructor(private readonly establishmentsService: EstablishmentService) {}
 
   @Post()
   async saveEstablishment(@Body() newEstablishment: EstablishmentDTO): Promise<Establishment> {

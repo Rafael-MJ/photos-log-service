@@ -2,20 +2,20 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { LogConfig } from './log/log.config';
-import { LogsController } from './log/controllers/log.controller';
-import { LogsService } from './log/services/log.service';
+import { LogController } from './log/controllers/log.controller';
+import { LogService } from './log/services/log.service';
 import { LogRepository } from './log/log.repository';
 import { LogSchema } from './log/schemas/log.schema';
 import { DatabaseConfig } from './common/database/database.config';
 import { MachineConfig } from './machine/machine.config';
 import { MachineSchema } from './machine/schemas/machine.schema';
-import { MachinesController } from './machine/controllers/machine.controller';
-import { MachinesService } from './machine/services/machine.service';
+import { MachineController } from './machine/controllers/machine.controller';
+import { MachineService } from './machine/services/machine.service';
 import { MachineRepository } from './machine/machine.repository';
 import { EstablishmentConfig } from './establishment/establishment.config';
 import { EstablishmentSchema } from './establishment/schemas/establishment.schema';
-import { EstablishmentsController } from './establishment/controllers/establishment.controller';
-import { EstablishmentsService } from './establishment/services/establishment.service';
+import { EstablishmentController } from './establishment/controllers/establishment.controller';
+import { EstablishmentService } from './establishment/services/establishment.service';
 import { EstablishmentRepository } from './establishment/establishment.repository';
 
 @Module({
@@ -28,13 +28,13 @@ import { EstablishmentRepository } from './establishment/establishment.repositor
       { name: EstablishmentConfig.modelSchemaDefinition, schema: EstablishmentSchema },
     ]),
   ],
-  controllers: [LogsController, MachinesController, EstablishmentsController],
+  controllers: [LogController, MachineController, EstablishmentController],
   providers: [
-    LogsService,
+    LogService,
     LogRepository,
-    MachinesService,
+    MachineService,
     MachineRepository,
-    EstablishmentsService,
+    EstablishmentService,
     EstablishmentRepository,
   ],
 })

@@ -5,7 +5,7 @@ import { Establishment } from '../interfaces/establishment.interface';
 import { EstablishmentRepository } from '../establishment.repository';
 
 @Injectable()
-export class EstablishmentsService {
+export class EstablishmentService {
   constructor(private readonly establishmentRepository: EstablishmentRepository) {}
 
   async getAllEstablishments(): Promise<Establishment[]> {
