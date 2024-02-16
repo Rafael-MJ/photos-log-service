@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { EstablishmentConfig } from '../establishment.config';
-import { EstablishmentsController } from './establishments.controller';
+import { EstablishmentsController } from './establishment.controller';
 
 describe(EstablishmentConfig.controllerDescribe, () => {
   let controller: EstablishmentsController;

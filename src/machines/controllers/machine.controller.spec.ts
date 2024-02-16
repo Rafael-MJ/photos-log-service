@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { MachineConfig } from '../machine.config';
-import { MachinesController } from './machines.controller';
+import { MachinesController } from './machine.controller';
 
 describe(MachineConfig.controllerDescribe, () => {
   let controller: MachinesController;

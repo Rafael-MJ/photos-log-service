@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { EstablishmentConfig } from '../establishment.config';
-import { EstablishmentsService } from './establishments.service';
+import { EstablishmentsService } from './establishment.service';
 
 describe(EstablishmentConfig.serviceDescribe, () => {
   let service: EstablishmentsService;

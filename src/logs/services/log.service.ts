@@ -1,11 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-import { MachinesService } from '../../machines/services/machines.service';
+import { MachinesService } from '../../machines/services/machine.service';
 import { Machine } from '../../machines/interfaces/machine.interface';
-import { LogDTO } from '../../logs/dto/logs.dto';
+import { LogDTO } from '../../logs/dto/log.dto';
 import { Log } from '../../logs/interfaces/log.interface';
 import { LogRepository } from '../log.repository';
-import { MachineDTO } from '../../machines/dto/machines.dto';
+import { MachineDTO } from '../../machines/dto/machine.dto';
 
 @Injectable()
 export class LogsService {

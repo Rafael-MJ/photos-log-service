@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { MachineConfig } from '../machine.config';
-import { MachinesService } from './machines.service';
+import { MachinesService } from './machine.service';
 
 describe(MachineConfig.serviceDescribe, () => {
   let service: MachinesService;

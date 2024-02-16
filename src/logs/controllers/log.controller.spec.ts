@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { LogConfig } from '../log.config';
-import { LogsController } from './logs.controller';
+import { LogsController } from './log.controller';
 
 describe(LogConfig.controllerDescribe, () => {
   let controller: LogsController;

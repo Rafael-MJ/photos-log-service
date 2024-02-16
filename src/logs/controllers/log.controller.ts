@@ -2,8 +2,8 @@ import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/commo
 
 import { Log } from '../../logs/interfaces/log.interface';
 import { Machine } from '../../machines/interfaces/machine.interface';
-import { LogsService } from '../services/logs.service';
-import { LogDTO } from '../dto/logs.dto';
+import { LogsService } from '../services/log.service';
+import { LogDTO } from '../dto/log.dto';
 import { LogConfig } from '../log.config';
 
 @Controller(LogConfig.controllerDefinition)
