@@ -16,9 +16,11 @@ export class MachineService {
   async getAllMachines(): Promise<Machine[]> {
     const allMachines = await this.machineRepository.getAllMachines();
 
-    if (!allMachines.length) throw new NotFoundException('There are no registers for machines');
-
-    return allMachines;
+    if (!allMachines.length) {
+      throw new NotFoundException('There are no registers for machines');
+    } else {
+      return allMachines;
+    }
   }
 
   async saveMachine(newMachine: MachineDTO): Promise<Machine> {
@@ -28,26 +30,30 @@ export class MachineService {
       await this.establishmentsService.getEstablishmentById(newMachine.currentEstablishmentId);
 
       return await this.machineRepository.saveMachine(newMachine);
+    } else {
+      throw new BadRequestException('This machine already exists');
     }
-
-    throw new BadRequestException('This machine already exists');
   }
 
   async getMachineByName(machineName: string): Promise<Machine> {
     const existMachine = await this.machineRepository.getMachineByName(machineName);
 
-    if (!existMachine) throw new NotFoundException('There are no results for this machine name');
-
-    return existMachine;
+    if (!existMachine) {
+      throw new NotFoundException('There are no results for this machine name');
+    } else {
+      return existMachine;
+    }
   }
 
   async getMachineById(machineId: Machine): Promise<Machine> {
     try {
       const existMachine = await this.machineRepository.getMachineById(machineId);
 
-      if (!existMachine) throw new NotFoundException('There are no results for this machine ID');
-
-      return existMachine;
+      if (!existMachine) {
+        throw new NotFoundException('There are no results for this machine ID');
+      } else {
+        return existMachine;
+      }
     } catch (error) {
       throw new Error(error.message);
     }
@@ -57,11 +63,13 @@ export class MachineService {
     try {
       const existMachine = await this.machineRepository.getMachineByName(machineName);
 
-      if (!existMachine) throw new NotFoundException('There are no results for this machine');
+      if (!existMachine) {
+        throw new NotFoundException('There are no results for this machine');
+      } else {
+        await this.machineRepository.updateMachineByName(machineName, newMachine);
 
-      await this.machineRepository.updateMachineByName(machineName, newMachine);
-
-      return await this.getMachineByName(newMachine.name);
+        return await this.getMachineByName(newMachine.name);
+      }
     } catch (error) {
       throw new Error(error.message);
     }
@@ -70,19 +78,22 @@ export class MachineService {
   async deleteMachineByName(machineName: string): Promise<Machine> {
     const existMachine = await this.machineRepository.deleteMachineByName(machineName);
 
-    if (!existMachine) throw new NotFoundException('This machine does not exist');
-
-    return existMachine;
+    if (!existMachine) {
+      throw new NotFoundException('This machine does not exist');
+    } else {
+      return existMachine;
+    }
   }
 
   async getMachinesByEstablishment(establishment: Establishment): Promise<Machine[]> {
     try {
       const foundMachines = await this.machineRepository.getMachinesByEstablishment(establishment);
 
-      if (!foundMachines.length)
+      if (!foundMachines.length) {
         throw new NotFoundException('There are no results for this establishment');
-
-      return foundMachines;
+      } else {
+        return foundMachines;
+      }
     } catch (error) {
       throw new Error(error.message);
     }

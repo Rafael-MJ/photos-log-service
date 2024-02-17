@@ -11,10 +11,11 @@ export class EstablishmentService {
   async getAllEstablishments(): Promise<Establishment[]> {
     const allEstablishments = await this.establishmentRepository.getAllEstablishments();
 
-    if (!allEstablishments.length)
+    if (!allEstablishments.length) {
       throw new NotFoundException('There are no registers for establishments');
-
-    return allEstablishments;
+    } else {
+      return allEstablishments;
+    }
   }
 
   async saveEstablishment(newEstablishment: EstablishmentDTO): Promise<Establishment> {
@@ -22,20 +23,22 @@ export class EstablishmentService {
       newEstablishment.name,
     );
 
-    if (!existEstablishment)
+    if (!existEstablishment) {
       return await this.establishmentRepository.saveEstablishment(newEstablishment);
-
-    throw new BadRequestException('This establishment already exists');
+    } else {
+      throw new BadRequestException('This establishment already exists');
+    }
   }
 
   async getEstablishmentByName(establishmentName: string): Promise<Establishment> {
     const existEstablishment =
       await this.establishmentRepository.getEstablishmentByName(establishmentName);
 
-    if (!existEstablishment)
+    if (!existEstablishment) {
       throw new NotFoundException('There are no results for this establishment name');
-
-    return existEstablishment;
+    } else {
+      return existEstablishment;
+    }
   }
 
   async getEstablishmentById(establishmentId: Establishment): Promise<Establishment> {
@@ -43,10 +46,11 @@ export class EstablishmentService {
       const existEstablishment =
         await this.establishmentRepository.getEstablishmentById(establishmentId);
 
-      if (!existEstablishment)
+      if (!existEstablishment) {
         throw new NotFoundException('There are no results for this establishment ID');
-
-      return existEstablishment;
+      } else {
+        return existEstablishment;
+      }
     } catch (error) {
       throw new Error(error.message);
     }
@@ -60,15 +64,16 @@ export class EstablishmentService {
       const existEstablishment =
         await this.establishmentRepository.getEstablishmentByName(establishmentName);
 
-      if (!existEstablishment)
+      if (!existEstablishment) {
         throw new NotFoundException('There are no results for this establishment');
+      } else {
+        await this.establishmentRepository.updateEstablishmentByName(
+          establishmentName,
+          newEstablishment,
+        );
 
-      await this.establishmentRepository.updateEstablishmentByName(
-        establishmentName,
-        newEstablishment,
-      );
-
-      return await this.getEstablishmentByName(newEstablishment.name);
+        return await this.getEstablishmentByName(newEstablishment.name);
+      }
     } catch (error) {
       throw new Error(error.message);
     }
@@ -78,27 +83,31 @@ export class EstablishmentService {
     const existEstablishment =
       await this.establishmentRepository.deleteEstablishmentByName(establishmentName);
 
-    if (!existEstablishment) throw new NotFoundException('This establishment does not exist');
-
-    return existEstablishment;
+    if (!existEstablishment) {
+      throw new NotFoundException('This establishment does not exist');
+    } else {
+      return existEstablishment;
+    }
   }
 
   async getEstablishmentsByCity(city: string): Promise<Establishment[]> {
     const foundEstablishments = await this.establishmentRepository.getEstablishmentsByCity(city);
 
-    if (!foundEstablishments.length)
+    if (!foundEstablishments.length) {
       throw new NotFoundException('There are no results for this city');
-
-    return foundEstablishments;
+    } else {
+      return foundEstablishments;
+    }
   }
 
   async getEstablishmentsByProvince(province: string): Promise<Establishment[]> {
     const foundEstablishments =
       await this.establishmentRepository.getEstablishmentsByProvince(province);
 
-    if (!foundEstablishments.length)
+    if (!foundEstablishments.length) {
       throw new NotFoundException('There are no results for this province');
-
-    return foundEstablishments;
+    } else {
+      return foundEstablishments;
+    }
   }
 }

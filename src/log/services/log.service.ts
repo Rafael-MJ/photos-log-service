@@ -32,30 +32,33 @@ export class LogService {
       printerInkStock: existMachine.printerInkStock - newLog.usedPrinterInk,
     };
 
-    if (updatedMachineData.paperStock < 0 && updatedMachineData.printerInkStock < 0)
+    if (updatedMachineData.paperStock < 0 && updatedMachineData.printerInkStock < 0) {
       throw new BadRequestException('Unavailable stock');
-    else if (updatedMachineData.paperStock < 0)
+    } else if (updatedMachineData.paperStock < 0) {
       throw new BadRequestException("The machine doesn't have enough paper stock");
-    else if (updatedMachineData.printerInkStock < 0)
+    } else if (updatedMachineData.printerInkStock < 0) {
       throw new BadRequestException("The machine doesn't have enough printer ink stock");
+    } else {
+      await this.machinesService.updateMachineByName(existMachine.name, updatedMachineData);
 
-    await this.machinesService.updateMachineByName(existMachine.name, updatedMachineData);
+      const updatedlogData: LogDTO = {
+        ...newLog,
+        establishmentId: existMachine.currentEstablishmentId,
+      };
 
-    const updatedlogData: LogDTO = {
-      ...newLog,
-      establishmentId: existMachine.currentEstablishmentId,
-    };
-
-    return await this.logRepository.saveLog(updatedlogData);
+      return await this.logRepository.saveLog(updatedlogData);
+    }
   }
 
   async getLogById(logID: string): Promise<Log> {
     try {
       const existLog = await this.logRepository.getLogById(logID);
 
-      if (!existLog) throw new NotFoundException('There are no results for this log ID');
-
-      return existLog;
+      if (!existLog) {
+        throw new NotFoundException('There are no results for this log ID');
+      } else {
+        return existLog;
+      }
     } catch (error) {
       throw new Error(error.message);
     }
@@ -65,9 +68,11 @@ export class LogService {
     try {
       const existLog = await this.logRepository.deleteLogById(logID);
 
-      if (!existLog) throw new NotFoundException('There are no results for this log ID');
-
-      return existLog;
+      if (!existLog) {
+        throw new NotFoundException('There are no results for this log ID');
+      } else {
+        return existLog;
+      }
     } catch (error) {
       throw new Error(error.message);
     }
@@ -77,11 +82,13 @@ export class LogService {
     try {
       const existLog = await this.logRepository.getLogById(logID);
 
-      if (!existLog) throw new NotFoundException('There are no results for this log');
+      if (!existLog) {
+        throw new NotFoundException('There are no results for this log');
+      } else {
+        await this.logRepository.updateLogById(logID, newLog);
 
-      await this.logRepository.updateLogById(logID, newLog);
-
-      return this.logRepository.getLogById(logID);
+        return this.logRepository.getLogById(logID);
+      }
     } catch (error) {
       throw new Error(error.message);
     }
@@ -91,10 +98,11 @@ export class LogService {
     try {
       const foundLogs = await this.logRepository.getLogsByMachineId(machineId);
 
-      if (!foundLogs.length)
+      if (!foundLogs.length) {
         throw new NotFoundException('There are no results for this machine ID');
-
-      return foundLogs;
+      } else {
+        return foundLogs;
+      }
     } catch (error) {
       throw new Error(error.message);
     }
@@ -104,10 +112,11 @@ export class LogService {
     try {
       const foundLogs = await this.logRepository.getLogsByEstablishment(establishment);
 
-      if (!foundLogs.length)
+      if (!foundLogs.length) {
         throw new NotFoundException('There are no results for this establishment');
-
-      return foundLogs;
+      } else {
+        return foundLogs;
+      }
     } catch (error) {
       throw new Error(error.message);
     }
