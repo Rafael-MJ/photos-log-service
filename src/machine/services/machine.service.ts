@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 
 import { Establishment } from '../../establishment/interfaces/establishment.interface';
 import { MachineDTO } from '../dto/machine.dto';
@@ -16,7 +16,7 @@ export class MachineService {
   async getAllMachines(): Promise<Machine[]> {
     const allMachines = await this.machineRepository.getAllMachines();
 
-    if (!allMachines.length) throw new BadRequestException('There are no registers for machines');
+    if (!allMachines.length) throw new NotFoundException('There are no registers for machines');
 
     return allMachines;
   }
@@ -36,7 +36,7 @@ export class MachineService {
   async getMachineByName(machineName: string): Promise<Machine> {
     const existMachine = await this.machineRepository.getMachineByName(machineName);
 
-    if (!existMachine) throw new BadRequestException('There are no results for this machine name');
+    if (!existMachine) throw new NotFoundException('There are no results for this machine name');
 
     return existMachine;
   }
@@ -45,11 +45,11 @@ export class MachineService {
     try {
       const existMachine = await this.machineRepository.getMachineById(machineId);
 
-      if (!existMachine) throw new BadRequestException('There are no results for this machine ID');
+      if (!existMachine) throw new NotFoundException('There are no results for this machine ID');
 
       return existMachine;
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new Error(error.message);
     }
   }
 
@@ -57,20 +57,20 @@ export class MachineService {
     try {
       const existMachine = await this.machineRepository.getMachineByName(machineName);
 
-      if (!existMachine) throw new BadRequestException('There are no results for this machine');
+      if (!existMachine) throw new NotFoundException('There are no results for this machine');
 
       await this.machineRepository.updateMachineByName(machineName, newMachine);
 
       return await this.getMachineByName(newMachine.name);
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new Error(error.message);
     }
   }
 
   async deleteMachineByName(machineName: string): Promise<Machine> {
     const existMachine = await this.machineRepository.deleteMachineByName(machineName);
 
-    if (!existMachine) throw new BadRequestException('This machine does not exist');
+    if (!existMachine) throw new NotFoundException('This machine does not exist');
 
     return existMachine;
   }
@@ -80,11 +80,11 @@ export class MachineService {
       const foundMachines = await this.machineRepository.getMachinesByEstablishment(establishment);
 
       if (!foundMachines.length)
-        throw new BadRequestException('There are no results for this establishment');
+        throw new NotFoundException('There are no results for this establishment');
 
       return foundMachines;
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new Error(error.message);
     }
   }
 }

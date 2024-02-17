@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 
 import { MachineService } from '../../machine/services/machine.service';
 import { Machine } from '../../machine/interfaces/machine.interface';
@@ -17,7 +17,7 @@ export class LogService {
   async getAllLogs(): Promise<Log[]> {
     const allLogs = await this.logRepository.getAllLogs();
 
-    if (!allLogs.length) throw new BadRequestException('There are no registers for logs');
+    if (!allLogs.length) throw new NotFoundException('There are no registers for logs');
 
     return allLogs;
   }
@@ -53,11 +53,11 @@ export class LogService {
     try {
       const existLog = await this.logRepository.getLogById(logID);
 
-      if (!existLog) throw new BadRequestException('There are no results for this log ID');
+      if (!existLog) throw new NotFoundException('There are no results for this log ID');
 
       return existLog;
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new Error(error.message);
     }
   }
 
@@ -65,11 +65,11 @@ export class LogService {
     try {
       const existLog = await this.logRepository.deleteLogById(logID);
 
-      if (!existLog) throw new BadRequestException('There are no results for this log ID');
+      if (!existLog) throw new NotFoundException('There are no results for this log ID');
 
       return existLog;
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new Error(error.message);
     }
   }
 
@@ -77,13 +77,13 @@ export class LogService {
     try {
       const existLog = await this.logRepository.getLogById(logID);
 
-      if (!existLog) throw new BadRequestException('There are no results for this log');
+      if (!existLog) throw new NotFoundException('There are no results for this log');
 
       await this.logRepository.updateLogById(logID, newLog);
 
       return this.logRepository.getLogById(logID);
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new Error(error.message);
     }
   }
 
@@ -92,11 +92,11 @@ export class LogService {
       const foundLogs = await this.logRepository.getLogsByMachineId(machineId);
 
       if (!foundLogs.length)
-        throw new BadRequestException('There are no results for this machine ID');
+        throw new NotFoundException('There are no results for this machine ID');
 
       return foundLogs;
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new Error(error.message);
     }
   }
 
@@ -105,11 +105,11 @@ export class LogService {
       const foundLogs = await this.logRepository.getLogsByEstablishment(establishment);
 
       if (!foundLogs.length)
-        throw new BadRequestException('There are no results for this establishment');
+        throw new NotFoundException('There are no results for this establishment');
 
       return foundLogs;
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new Error(error.message);
     }
   }
 }
