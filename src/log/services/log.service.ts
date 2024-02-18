@@ -17,19 +17,24 @@ export class LogService {
   async getAllLogs(): Promise<Log[]> {
     const allLogs = await this.logRepository.getAllLogs();
 
-    if (!allLogs.length) throw new NotFoundException('There are no registers for logs');
-
-    return allLogs;
+    if (!allLogs.length) {
+      throw new NotFoundException('There are no registers for logs');
+    } else {
+      return allLogs;
+    }
   }
 
   async saveLog(newLog: LogDTO): Promise<Log> {
     const existMachine = await this.machinesService.getMachineById(newLog.machineId);
 
+    const updatedPaperStock = existMachine.paperStock - newLog.usedPaperCount;
+    const updatedPrinterInkStock = existMachine.printerInkStock - newLog.usedPrinterInk;
+
     const updatedMachineData: MachineDTO = {
       currentEstablishmentId: existMachine.currentEstablishmentId,
       name: existMachine.name,
-      paperStock: existMachine.paperStock - newLog.usedPaperCount,
-      printerInkStock: existMachine.printerInkStock - newLog.usedPrinterInk,
+      paperStock: updatedPaperStock,
+      printerInkStock: updatedPrinterInkStock,
     };
 
     if (updatedMachineData.paperStock < 0 && updatedMachineData.printerInkStock < 0) {

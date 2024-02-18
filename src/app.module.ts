@@ -20,7 +20,7 @@ import { EstablishmentRepository } from './establishment/establishment.repositor
 
 @Module({
   imports: [
-    MongooseModule.forRoot(DatabaseConfig.mongoConnectionURL),
+    MongooseModule.forRoot(DatabaseConfig.getMongoConnectionURL()),
 
     MongooseModule.forFeature([
       { name: LogConfig.modelSchemaDefinition, schema: LogSchema },
