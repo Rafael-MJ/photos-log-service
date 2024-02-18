@@ -19,5 +19,5 @@ export class EstablishmentDTO {
   @validator.IsNotEmpty()
   @validator.IsString()
   @validator.Length(2, 2)
-  readonly province: string;
+  readonly state: string;
 }

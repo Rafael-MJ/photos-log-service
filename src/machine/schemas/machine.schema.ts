@@ -5,7 +5,7 @@ import { Establishment } from '../../establishment/interfaces/establishment.inte
 
 @Schema({ versionKey: false })
 class Machine {
-  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Establishment' })
+  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId })
   currentEstablishmentId: Establishment;
 
   @Prop({ required: true, unique: true, lowercase: true, trim: true })

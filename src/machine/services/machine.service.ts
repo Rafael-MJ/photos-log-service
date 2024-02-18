@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 
 import { Establishment } from '../../establishment/interfaces/establishment.interface';
 import { MachineDTO } from '../dto/machine.dto';
@@ -31,7 +31,7 @@ export class MachineService {
 
       return await this.machineRepository.saveMachine(newMachine);
     } else {
-      throw new BadRequestException('This machine already exists');
+      throw new ConflictException('This machine already exists');
     }
   }
 

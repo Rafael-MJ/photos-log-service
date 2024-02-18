@@ -48,9 +48,9 @@ export class EstablishmentRepository {
     });
   }
 
-  async getEstablishmentsByProvince(province: string): Promise<Establishment[]> {
+  async getEstablishmentsByState(state: string): Promise<Establishment[]> {
     return await this.establishmentModel.find({
-      province: { $regex: province, $options: 'i' },
+      state: { $regex: state, $options: 'i' },
     });
   }
 }

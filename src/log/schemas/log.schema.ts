@@ -6,10 +6,10 @@ import { Establishment } from '../../establishment/interfaces/establishment.inte
 
 @Schema({ versionKey: false })
 class Log {
-  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Machine' })
+  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId })
   machineId: Machine;
 
-  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Establishment' })
+  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId })
   establishmentId: Establishment;
 
   @Prop({ required: true, type: Number })

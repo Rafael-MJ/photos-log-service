@@ -20,8 +20,8 @@ export class MachineController {
     return await this.machinesService.getAllMachines();
   }
 
-  @Get('id/:machineID')
-  async getMachineById(@Param('machineID') machineName: Machine): Promise<Machine> {
+  @Get('id/:machineId')
+  async getMachineById(@Param('machineId') machineName: Machine): Promise<Machine> {
     return await this.machinesService.getMachineById(machineName);
   }
 

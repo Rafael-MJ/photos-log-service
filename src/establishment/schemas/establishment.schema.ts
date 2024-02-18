@@ -12,7 +12,7 @@ class Establishment {
   city: string;
 
   @Prop({ required: true, type: String })
-  province: string;
+  state: string;
 }
 
 export const EstablishmentSchema = SchemaFactory.createForClass(Establishment);

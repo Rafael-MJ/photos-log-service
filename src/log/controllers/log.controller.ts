@@ -20,13 +20,13 @@ export class LogController {
     return await this.logsService.getAllLogs();
   }
 
-  @Get('id/:logID')
-  async getLogById(@Param('logID') logID: string): Promise<Log> {
+  @Get('id/:logId')
+  async getLogById(@Param('logId') logID: string): Promise<Log> {
     return await this.logsService.getLogById(logID);
   }
 
-  @Get('machine/:machineID')
-  async getLogsByMachineId(@Param('machineID') machineId: Machine): Promise<Log[]> {
+  @Get('machine/:machineId')
+  async getLogsByMachineId(@Param('machineId') machineId: Machine): Promise<Log[]> {
     return await this.logsService.getLogsByMachineId(machineId);
   }
 
@@ -35,13 +35,13 @@ export class LogController {
     return await this.logsService.getLogsByEstablishment(establishment);
   }
 
-  @Patch('id/:logID')
-  async updateLogById(@Param('logID') logID: string, @Body() newLog: LogDTO): Promise<Log> {
+  @Patch('id/:logId')
+  async updateLogById(@Param('logId') logID: string, @Body() newLog: LogDTO): Promise<Log> {
     return await this.logsService.updateLogById(logID, newLog);
   }
 
-  @Delete('id/:logID')
-  async deletelogById(@Param('logID') logID: string): Promise<Log> {
+  @Delete('id/:logId')
+  async deletelogById(@Param('logId') logID: string): Promise<Log> {
     return await this.logsService.deletelogById(logID);
   }
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 
 import { EstablishmentDTO } from '../dto/establishment.dto';
 import { Establishment } from '../interfaces/establishment.interface';
@@ -26,7 +26,7 @@ export class EstablishmentService {
     if (!existEstablishment) {
       return await this.establishmentRepository.saveEstablishment(newEstablishment);
     } else {
-      throw new BadRequestException('This establishment already exists');
+      throw new ConflictException('This establishment already exists');
     }
   }
 
@@ -100,12 +100,11 @@ export class EstablishmentService {
     }
   }
 
-  async getEstablishmentsByProvince(province: string): Promise<Establishment[]> {
-    const foundEstablishments =
-      await this.establishmentRepository.getEstablishmentsByProvince(province);
+  async getEstablishmentsByState(state: string): Promise<Establishment[]> {
+    const foundEstablishments = await this.establishmentRepository.getEstablishmentsByState(state);
 
     if (!foundEstablishments.length) {
-      throw new NotFoundException('There are no results for this province');
+      throw new NotFoundException('There are no results for this state');
     } else {
       return foundEstablishments;
     }

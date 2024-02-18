@@ -21,7 +21,6 @@ import { EstablishmentRepository } from './establishment/establishment.repositor
 @Module({
   imports: [
     MongooseModule.forRoot(DatabaseConfig.getMongoConnectionURL()),
-
     MongooseModule.forFeature([
       { name: LogConfig.modelSchemaDefinition, schema: LogSchema },
       { name: MachineConfig.modelSchemaDefinition, schema: MachineSchema },

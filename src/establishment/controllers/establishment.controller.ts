@@ -19,11 +19,11 @@ export class EstablishmentController {
     return await this.establishmentsService.getAllEstablishments();
   }
 
-  @Get('id/:establishmentID')
+  @Get('id/:establishmentId')
   async getEstablishmentById(
-    @Param('establishmentID') establishmentName: Establishment,
+    @Param('establishmentId') establishmentId: Establishment,
   ): Promise<Establishment> {
-    return await this.establishmentsService.getEstablishmentById(establishmentName);
+    return await this.establishmentsService.getEstablishmentById(establishmentId);
   }
 
   @Get('name/:establishmentName')
@@ -38,9 +38,9 @@ export class EstablishmentController {
     return await this.establishmentsService.getEstablishmentsByCity(city);
   }
 
-  @Get('province/:province')
-  async getEstablishmentsByProvince(@Param('province') province: string): Promise<Establishment[]> {
-    return await this.establishmentsService.getEstablishmentsByProvince(province);
+  @Get('state/:state')
+  async getEstablishmentsByState(@Param('state') state: string): Promise<Establishment[]> {
+    return await this.establishmentsService.getEstablishmentsByState(state);
   }
 
   @Patch('name/:establishmentName')
