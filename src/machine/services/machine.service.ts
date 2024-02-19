@@ -55,7 +55,7 @@ export class MachineService {
         return existMachine;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -71,7 +71,7 @@ export class MachineService {
         return await this.getMachineByName(newMachine.name);
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -95,7 +95,7 @@ export class MachineService {
         return foundMachines;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 }
