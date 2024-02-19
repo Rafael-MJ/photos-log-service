@@ -52,7 +52,7 @@ export class EstablishmentService {
         return existEstablishment;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -75,7 +75,7 @@ export class EstablishmentService {
         return await this.getEstablishmentByName(newEstablishment.name);
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 

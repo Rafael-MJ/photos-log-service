@@ -65,7 +65,7 @@ export class LogService {
         return existLog;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -79,7 +79,7 @@ export class LogService {
         return existLog;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -95,7 +95,7 @@ export class LogService {
         return this.logRepository.getLogById(logID);
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -109,7 +109,7 @@ export class LogService {
         return foundLogs;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -123,7 +123,7 @@ export class LogService {
         return foundLogs;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 }
